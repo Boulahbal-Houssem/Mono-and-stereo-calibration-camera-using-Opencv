@@ -39,7 +39,6 @@ int main(int argc, char** argv )
             pointBuf.clear();
             
 	    bool found = false;
-	    /***** Implémenter ici la fonction 'findCirclesGrid' *****/
 	    found = findCirclesGrid(frame, boardSize, pointBuf, CALIB_CB_ASYMMETRIC_GRID);
 
             // Affichage et sauvegarde des points
@@ -72,7 +71,6 @@ int main(int argc, char** argv )
     vector<Mat> tvecs;
     double rms = 0;
     // Etalonnage caméra
-    /***** Implémenter ici la fonction 'calibrateCamera' *****/
     rms = calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix, 
 			  distCoeffs, rvecs, tvecs, CV_CALIB_FIX_K4|CV_CALIB_FIX_K5|CV_CALIB_FIX_K6);
 
@@ -85,9 +83,6 @@ int main(int argc, char** argv )
     Mat R;
     Mat map1, map2;
     Mat newCameraMatrix = getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, Size(640, 480), 1, Size(640, 480), 0);
-
-    /***** Implémenter ici la fonction 'initUndistortRectifyMap'.
-           Utiliser la matrice 'newCameraMatrix' définie ci-dessus pour l'argument 'newCameraMatrix'  *****/
     initUndistortRectifyMap(cameraMatrix, distCoeffs, R,
       newCameraMatrix,
       imageSize, CV_32FC1, map1, map2);
@@ -99,7 +94,7 @@ int main(int argc, char** argv )
         cap >> frame; // capture nouvelle image
         Mat rectFrame; // Varible pour l'image rectifiée
 
-	/***** Implémenter ici la fonction 'remap' *****/
+
 	remap(frame, rectFrame, map1, map2, INTER_LINEAR);
 
 

@@ -53,7 +53,7 @@ int main(int argc, char** argv )
 	pointBuf.clear();
 	    
 	int found = 0;
-	/***** Implémenter ici la fonction 'findCirclesGrid' *****/
+
 	found = findCirclesGrid(acqImageGray, boardSize, pointBuf, CALIB_CB_ASYMMETRIC_GRID);
 
         // Affichage et sauvegarde des points
@@ -83,7 +83,7 @@ int main(int argc, char** argv )
         pointBuf.clear();
             
         int found = 0;
-	/***** Implémenter ici la fonction 'findCirclesGrid' *****/
+
 	found = findCirclesGrid(acqImageGray, boardSize, pointBuf, CALIB_CB_ASYMMETRIC_GRID);
 
 
@@ -111,7 +111,7 @@ int main(int argc, char** argv )
     vector<Mat> tvecsLeft, tvecsRight;
     double rmsLeft, rmsRight;
     Size imageSize(640, 480);
-    //***** Implémenter ici la fonction 'calibrateCamera' pour les caméras gauche et droite *****/
+
     rmsLeft = calibrateCamera(objectPoints, imagePointsLeft, imageSize, cameraMatrixLeft, 
 			  distCoeffsLeft, rvecsLeft, tvecsLeft);
     rmsRight = calibrateCamera(objectPoints, imagePointsRight, imageSize, cameraMatrixRight, 
@@ -131,7 +131,6 @@ int main(int argc, char** argv )
     // Stéréo calibration
     Mat R, T, E, F;
     double rms;
-    //***** Implémenter ici la fonction 'stereoCalibrate' *****/
     rms = stereoCalibrate(objectPoints, imagePointsLeft, imagePointsRight, cameraMatrixLeft, distCoeffsLeft, cameraMatrixRight, distCoeffsRight, imageSize, R, T, E, F);
 
     std::cout << "rms: " << rms << std::endl;
@@ -143,7 +142,6 @@ int main(int argc, char** argv )
     Mat R1, R2, P1, P2, Q;
     Rect validRoi[2];
 
-    //***** Implémenter ici la fonction de stéréo rectification *****/
     stereoRectify(cameraMatrixLeft, distCoeffsLeft, cameraMatrixRight, distCoeffsRight, imageSize, R, T, R1, R2, P1, P2, Q);// CV_CALIB_ZERO_DISPARITY
 
     // Rectification des images de test
@@ -162,10 +160,6 @@ int main(int argc, char** argv )
 
     Mat map0x, map0y, map1x, map1y;
     Mat imgU0, imgU1;
-
-    //***** Implémenter ici les fonctions 'initUndistortRectifyMap' et 'remap' *****/
-    // Remarque 1: utiliser les matrices R1, R2, P1 et P2 issues de 'stereoRectify'
-    // Remarque 2: utiliser les matrices imgU0 et imgU1 comme sorties des fonctions 'remap'
     initUndistortRectifyMap(cameraMatrixLeft, distCoeffsLeft, R1,
       P1,
       imageSize, CV_32FC1, map0x, map0y);
